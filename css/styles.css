@@ -1,0 +1,268 @@
+:root {
+  --bg: #f4f1ea;
+  --surface: #ffffff;
+  --ink: #1c2b2d;
+  --muted: #5c6b6d;
+  --accent: #d3543f;
+  --accent-dark: #a83f2f;
+  --teal: #1f6f78;
+  --teal-soft: #d8ecee;
+  --border: #d9d2c5;
+  --shadow: 0 18px 40px rgba(28, 43, 45, 0.08);
+  --radius: 18px;
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, #fff8ef 0%, transparent 35%),
+    radial-gradient(circle at bottom right, var(--teal-soft) 0%, transparent 30%),
+    var(--bg);
+  line-height: 1.5;
+}
+
+.container {
+  width: min(960px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.site-header {
+  padding: 3rem 0 2rem;
+}
+
+.site-header--compact {
+  padding-top: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.lead {
+  margin: 0.75rem 0 0;
+  max-width: 42rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--teal);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.tools-section {
+  padding-bottom: 3rem;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--teal);
+}
+
+.tool-card--coming-soon {
+  opacity: 0.72;
+}
+
+.tool-icon {
+  font-size: 1.75rem;
+}
+
+.tool-card h3 {
+  font-size: 1.15rem;
+}
+
+.tool-card p {
+  margin: 0;
+  color: var(--muted);
+  flex: 1;
+}
+
+.tool-link {
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.site-footer {
+  padding: 2rem 0 3rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.roulette-page {
+  padding-bottom: 4rem;
+}
+
+.roulette-panel {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: var(--shadow);
+}
+
+.wheel-wrap {
+  position: relative;
+  width: min(420px, 88vw);
+  aspect-ratio: 1;
+}
+
+#wheel {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(28, 43, 45, 0.15);
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 28px solid var(--accent);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+  z-index: 2;
+}
+
+.roulette-controls {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 160ms ease, transform 120ms ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.spin-status {
+  margin: 0;
+  color: var(--muted);
+}
+
+.result-card {
+  width: min(100%, 34rem);
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--teal-soft);
+  border: 1px solid #b9dde1;
+  text-align: center;
+}
+
+.result-card--hidden {
+  display: none;
+}
+
+.result-label {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.result-text {
+  margin: 0;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .site-header {
+    padding-top: 2rem;
+  }
+
+  .roulette-panel {
+    padding: 1rem;
+  }
+}
