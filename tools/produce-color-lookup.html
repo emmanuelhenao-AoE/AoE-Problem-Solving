@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function () {
+      var basePath = "/";
+      if (location.hostname.endsWith("github.io")) {
+        basePath = "/AoE-Problem-Solving/";
+      }
+      var base = document.createElement("base");
+      base.href = basePath;
+      document.head.appendChild(base);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Produce Color Lookup · AoE Problem Solving</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="site-header site-header--compact">
     <div class="container">
-      <a class="back-link" href="../index.html">← All tools</a>
+      <a class="back-link" href="index.html">← All tools</a>
       <h1>Produce Color Lookup</h1>
       <p class="lead">
         Search fruits and vegetables to find their color category.
@@ -47,7 +58,7 @@
     </section>
   </main>
 
-  <script src="../js/produce-data.js"></script>
-  <script src="../js/produce-lookup.js"></script>
+  <script src="js/produce-data.js"></script>
+  <script src="js/produce-lookup.js"></script>
 </body>
 </html>
