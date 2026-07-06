@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produce Color Lookup · AoE Problem Solving</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="site-header site-header--compact">
+    <div class="container">
+      <a class="back-link" href="../index.html">← All tools</a>
+      <h1>Produce Color Lookup</h1>
+      <p class="lead">
+        Search fruits and vegetables to find their color category.
+      </p>
+    </div>
+  </header>
+
+  <main class="container produce-page">
+    <section class="produce-panel">
+      <div class="produce-search-bar">
+        <label class="field-label" for="produce-search">Search produce</label>
+        <input
+          id="produce-search"
+          class="search-input"
+          type="search"
+          placeholder="Try coconut, lychee, kale, or tomato..."
+          autocomplete="off"
+        >
+      </div>
+
+      <p id="results-count" class="results-count">Start typing to search</p>
+
+      <div id="results-list" class="results-list" role="listbox" aria-label="Search results"></div>
+
+      <p id="empty-state" class="empty-state empty-state--hidden">
+        No produce found. Try a different spelling.
+      </p>
+
+      <article id="detail-card" class="detail-card detail-card--hidden" aria-live="polite">
+        <p class="result-label">Color category</p>
+        <h2 id="detail-name" class="detail-name"></h2>
+        <p id="detail-type" class="detail-type"></p>
+        <div id="detail-badge" class="detail-badge"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="../js/produce-data.js"></script>
+  <script src="../js/produce-lookup.js"></script>
+</body>
+</html>
