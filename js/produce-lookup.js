@@ -1,4 +1,5 @@
 const searchInput = document.getElementById("produce-search");
+const searchHint = document.getElementById("search-hint");
 const resultsList = document.getElementById("results-list");
 const resultsCount = document.getElementById("results-count");
 const emptyState = document.getElementById("empty-state");
@@ -33,42 +34,59 @@ function createBadge(category, compact = false) {
   return `<span class="${className}">${info.label}</span>`;
 }
 
+function setVisible(element, visible, hiddenClass) {
+  element.classList.toggle(hiddenClass, !visible);
+  if ("hidden" in element) {
+    element.hidden = !visible;
+  }
+}
+
 function showDetail(item) {
   detailName.textContent = item.name;
   detailType.textContent = item.type.charAt(0).toUpperCase() + item.type.slice(1);
   detailBadge.innerHTML = createBadge(item.category);
-  detailCard.classList.remove("detail-card--hidden");
+  setVisible(detailCard, true, "detail-card--hidden");
+}
+
+function hideDetail() {
+  setVisible(detailCard, false, "detail-card--hidden");
 }
 
 function renderResults() {
   const query = normalize(searchInput.value);
 
   if (!query) {
-    resultsCount.textContent = "Start typing to search";
+    setVisible(searchHint, true, "search-hint--hidden");
+    setVisible(resultsCount, false, "results-count--hidden");
+    setVisible(resultsList, false, "results-list--hidden");
+    setVisible(emptyState, false, "empty-state--hidden");
+    hideDetail();
     resultsList.innerHTML = "";
-    emptyState.classList.add("empty-state--hidden");
-    detailCard.classList.add("detail-card--hidden");
     return;
   }
+
+  setVisible(searchHint, false, "search-hint--hidden");
 
   const matches = PRODUCE_DATABASE.filter(matchesQuery);
   const limited = matches.slice(0, MAX_RESULTS);
 
-  resultsCount.textContent =
-    matches.length === 0
-      ? "No matches"
-      : matches.length > MAX_RESULTS
-        ? `Showing ${MAX_RESULTS} of ${matches.length} matches`
-        : `${matches.length} match${matches.length === 1 ? "" : "es"}`;
-
   if (matches.length === 0) {
+    setVisible(resultsCount, false, "results-count--hidden");
+    setVisible(resultsList, false, "results-list--hidden");
+    setVisible(emptyState, true, "empty-state--hidden");
+    hideDetail();
     resultsList.innerHTML = "";
-    emptyState.classList.remove("empty-state--hidden");
-    detailCard.classList.add("detail-card--hidden");
     return;
   }
 
-  emptyState.classList.add("empty-state--hidden");
+  setVisible(emptyState, false, "empty-state--hidden");
+  setVisible(resultsCount, true, "results-count--hidden");
+  setVisible(resultsList, true, "results-list--hidden");
+
+  resultsCount.textContent =
+    matches.length > MAX_RESULTS
+      ? `Showing ${MAX_RESULTS} of ${matches.length} matches`
+      : `${matches.length} match${matches.length === 1 ? "" : "es"}`;
 
   resultsList.innerHTML = limited
     .map(
@@ -103,9 +121,19 @@ function renderResults() {
     const exact = matches.find((item) => normalize(item.name) === query);
     if (exact) {
       showDetail(exact);
+    } else {
+      hideDetail();
     }
   }
 }
+
+document.querySelectorAll(".suggestion-chip").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    searchInput.value = chip.dataset.query;
+    searchInput.focus();
+    renderResults();
+  });
+});
 
 searchInput.addEventListener("input", renderResults);
 renderResults();

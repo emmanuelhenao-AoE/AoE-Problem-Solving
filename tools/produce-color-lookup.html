@@ -21,6 +21,7 @@
   <header class="site-header site-header--compact">
     <div class="container">
       <a class="back-link" href="index.html">← All tools</a>
+      <p class="eyebrow">Produce lookup</p>
       <h1>Produce Color Lookup</h1>
       <p class="lead">
         Search fruits and vegetables to find their color category.
@@ -30,26 +31,40 @@
 
   <main class="container produce-page">
     <section class="produce-panel">
-      <div class="produce-search-bar">
-        <label class="field-label" for="produce-search">Search produce</label>
+      <div class="search-field">
+        <label class="visually-hidden" for="produce-search">Search produce</label>
+        <span class="search-field__icon" aria-hidden="true">🔍</span>
         <input
           id="produce-search"
-          class="search-input"
+          class="search-input search-input--with-icon"
           type="search"
-          placeholder="Try coconut, lychee, kale, or tomato..."
+          placeholder="Search coconut, lychee, kale, tomato..."
           autocomplete="off"
         >
       </div>
 
-      <p id="results-count" class="results-count">Start typing to search</p>
+      <div id="search-hint" class="search-hint">
+        <p class="search-hint__title">Try a quick search</p>
+        <p class="search-hint__text">Tap a suggestion or start typing a fruit or vegetable.</p>
+        <div class="suggestion-chips" role="list">
+          <button type="button" class="suggestion-chip" data-query="coconut">Coconut</button>
+          <button type="button" class="suggestion-chip" data-query="lychee">Lychee</button>
+          <button type="button" class="suggestion-chip" data-query="kale">Kale</button>
+          <button type="button" class="suggestion-chip" data-query="tomato">Tomato</button>
+        </div>
+      </div>
 
-      <div id="results-list" class="results-list" role="listbox" aria-label="Search results"></div>
+      <p id="results-count" class="results-count results-count--hidden" aria-live="polite"></p>
 
-      <p id="empty-state" class="empty-state empty-state--hidden">
-        No produce found. Try a different spelling.
-      </p>
+      <div id="results-list" class="results-list results-list--hidden" role="listbox" aria-label="Search results"></div>
 
-      <article id="detail-card" class="detail-card detail-card--hidden" aria-live="polite">
+      <div id="empty-state" class="empty-state empty-state--hidden" role="status">
+        <span class="empty-state__icon" aria-hidden="true">🤔</span>
+        <p class="empty-state__title">No matches found</p>
+        <p class="empty-state__text">Try a different spelling or a more common name.</p>
+      </div>
+
+      <article id="detail-card" class="detail-card detail-card--hidden" aria-live="polite" hidden>
         <p class="result-label">Color category</p>
         <h2 id="detail-name" class="detail-name"></h2>
         <p id="detail-type" class="detail-type"></p>
