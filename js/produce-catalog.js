@@ -1,4 +1,4 @@
-﻿const COLOR_CATEGORIES = {
+globalThis.COLOR_CATEGORIES = {
   red: { label: "Red" },
   green: { label: "Green" },
   orange: { label: "Orange" },
@@ -6,7 +6,7 @@
   "blue-purple": { label: "Blue / Purple" },
 };
 
-const PRODUCE_DATABASE = [
+globalThis.PRODUCE_DATABASE = [
   { name: "Apple", type: "fruit", category: "red" },
   { name: "Banana", type: "fruit", category: "yellow-white" },
   { name: "Orange", type: "fruit", category: "orange" },

@@ -13,8 +13,13 @@ function normalize(text) {
   return text.toLowerCase().trim();
 }
 
+function getProduceDatabase() {
+  return globalThis.PRODUCE_DATABASE;
+}
+
 function getCategoryInfo(category) {
-  return COLOR_CATEGORIES[category] || { label: category };
+  const categories = globalThis.COLOR_CATEGORIES || {};
+  return categories[category] || { label: category };
 }
 
 function matchesQuery(item) {
@@ -52,7 +57,8 @@ function hideDetail() {
 }
 
 function renderResults() {
-  if (typeof PRODUCE_DATABASE === "undefined") {
+  const database = getProduceDatabase();
+  if (!Array.isArray(database)) {
     resultsCount.textContent = "Produce data failed to load. Refresh the page.";
     return;
   }
@@ -69,7 +75,7 @@ function renderResults() {
     return;
   }
 
-  const matches = PRODUCE_DATABASE.filter(matchesQuery);
+  const matches = database.filter(matchesQuery);
   const limited = matches.slice(0, MAX_RESULTS);
 
   if (matches.length === 0) {
@@ -111,7 +117,7 @@ function renderResults() {
 
   resultsList.querySelectorAll(".result-row").forEach((button) => {
     button.addEventListener("click", () => {
-      const item = PRODUCE_DATABASE.find((entry) => entry.name === button.dataset.name);
+      const item = database.find((entry) => entry.name === button.dataset.name);
       if (item) {
         showDetail(item);
       }
