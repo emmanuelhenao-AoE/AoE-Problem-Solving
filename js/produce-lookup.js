@@ -8,13 +8,15 @@ const detailType = document.getElementById("detail-type");
 const detailBadge = document.getElementById("detail-badge");
 
 const MAX_RESULTS = 50;
+const databaseReady = Array.isArray(window.PRODUCE_DATABASE);
 
 function normalize(text) {
   return text.toLowerCase().trim();
 }
 
 function getCategoryInfo(category) {
-  return COLOR_CATEGORIES[category] || { label: category };
+  const categories = window.COLOR_CATEGORIES || {};
+  return categories[category] || { label: category };
 }
 
 function matchesQuery(item) {
@@ -52,6 +54,11 @@ function hideDetail() {
 }
 
 function renderResults() {
+  if (!databaseReady) {
+    resultsCount.textContent = "Produce data failed to load. Refresh the page.";
+    return;
+  }
+
   const query = normalize(searchInput.value);
 
   if (!query) {
@@ -64,7 +71,7 @@ function renderResults() {
     return;
   }
 
-  const matches = PRODUCE_DATABASE.filter(matchesQuery);
+  const matches = window.PRODUCE_DATABASE.filter(matchesQuery);
   const limited = matches.slice(0, MAX_RESULTS);
 
   if (matches.length === 0) {
@@ -106,7 +113,7 @@ function renderResults() {
 
   resultsList.querySelectorAll(".result-row").forEach((button) => {
     button.addEventListener("click", () => {
-      const item = PRODUCE_DATABASE.find((entry) => entry.name === button.dataset.name);
+      const item = window.PRODUCE_DATABASE.find((entry) => entry.name === button.dataset.name);
       if (item) {
         showDetail(item);
       }
