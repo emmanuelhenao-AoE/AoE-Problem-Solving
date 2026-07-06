@@ -31,30 +31,18 @@
 
   <main class="container produce-page">
     <section class="produce-panel">
-      <div class="search-field">
-        <label class="visually-hidden" for="produce-search">Search produce</label>
-        <span class="search-field__icon" aria-hidden="true">🔍</span>
+      <div class="produce-search-bar">
+        <label class="field-label" for="produce-search">Search produce</label>
         <input
           id="produce-search"
-          class="search-input search-input--with-icon"
+          class="search-input"
           type="search"
-          placeholder="Search coconut, lychee, kale, tomato..."
+          placeholder="Try coconut, lychee, kale, or tomato..."
           autocomplete="off"
         >
       </div>
 
-      <div id="search-hint" class="search-hint">
-        <p class="search-hint__title">Try a quick search</p>
-        <p class="search-hint__text">Tap a suggestion or start typing a fruit or vegetable.</p>
-        <div class="suggestion-chips" role="list">
-          <button type="button" class="suggestion-chip" data-query="coconut">Coconut</button>
-          <button type="button" class="suggestion-chip" data-query="lychee">Lychee</button>
-          <button type="button" class="suggestion-chip" data-query="kale">Kale</button>
-          <button type="button" class="suggestion-chip" data-query="tomato">Tomato</button>
-        </div>
-      </div>
-
-      <p id="results-count" class="results-count results-count--hidden" aria-live="polite"></p>
+      <p id="results-count" class="results-count" aria-live="polite">Start typing to search</p>
 
       <div id="results-list" class="results-list results-list--hidden" role="listbox" aria-label="Search results"></div>
 

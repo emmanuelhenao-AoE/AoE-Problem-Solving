@@ -1,5 +1,4 @@
 const searchInput = document.getElementById("produce-search");
-const searchHint = document.getElementById("search-hint");
 const resultsList = document.getElementById("results-list");
 const resultsCount = document.getElementById("results-count");
 const emptyState = document.getElementById("empty-state");
@@ -56,8 +55,8 @@ function renderResults() {
   const query = normalize(searchInput.value);
 
   if (!query) {
-    setVisible(searchHint, true, "search-hint--hidden");
-    setVisible(resultsCount, false, "results-count--hidden");
+    resultsCount.textContent = "Start typing to search";
+    setVisible(resultsCount, true, "results-count--hidden");
     setVisible(resultsList, false, "results-list--hidden");
     setVisible(emptyState, false, "empty-state--hidden");
     hideDetail();
@@ -65,13 +64,12 @@ function renderResults() {
     return;
   }
 
-  setVisible(searchHint, false, "search-hint--hidden");
-
   const matches = PRODUCE_DATABASE.filter(matchesQuery);
   const limited = matches.slice(0, MAX_RESULTS);
 
   if (matches.length === 0) {
-    setVisible(resultsCount, false, "results-count--hidden");
+    resultsCount.textContent = "No matches";
+    setVisible(resultsCount, true, "results-count--hidden");
     setVisible(resultsList, false, "results-list--hidden");
     setVisible(emptyState, true, "empty-state--hidden");
     hideDetail();
@@ -126,14 +124,6 @@ function renderResults() {
     }
   }
 }
-
-document.querySelectorAll(".suggestion-chip").forEach((chip) => {
-  chip.addEventListener("click", () => {
-    searchInput.value = chip.dataset.query;
-    searchInput.focus();
-    renderResults();
-  });
-});
 
 searchInput.addEventListener("input", renderResults);
 renderResults();
