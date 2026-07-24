@@ -4,7 +4,7 @@ Small office utilities that make everyday work a little easier.
 
 ## Tools
 
-- **Ice Breaker Roulette** — spin a wheel to get a random conversation starter for meetings or team hangouts.
+- **Produce Color Lookup** — search fruits and vegetables to find their color category.
 
 ## Open locally in your browser
 
@@ -38,7 +38,7 @@ You're already in Cursor (a VS Code–style editor). Open this folder as your wo
 ```powershell
 git init
 git add .
-git commit -m "Initial commit: AoE Problem Solving with ice breaker roulette"
+git commit -m "Initial commit: AoE Problem Solving"
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/aoe-problem-solving.git
 git push -u origin main
